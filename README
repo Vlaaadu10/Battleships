@@ -1,0 +1,56 @@
+# **In this document you can see the implementation of the second assignment from the Computer Programming and Programming Languages I course. You'll see below the description of the concepts and functions used in Battleships including the statistics extension and the Hill Cipher algorithm. Moreover, the implementation is modular, each problem being divided into independent functions**
+314CA Stefan Alexandru Vladut
+
+## The structure
+The project is organized into 4 parts:
+
+`1. Game setup and board management`
+-   receive game dimensions and placing the ships
+-   initializing structures dinamically
+-   validating placements and orientations
+
+`2. Gameplay logic`
+-   alternating turns between players
+-   tracking hits, misses, destroyed ships etc
+-   print the outcome of every move
+
+`3. Statistics`
+-   calculating players accuracy across all matches
+-   caclulating some what if cases and minimum/ maximum queries for a specific goal
+
+`4. Hill Cipher transformation`
+-   coding and decoding encrypted commands
+-   modular arithmetic operations in base 37
+-   Gauss-Jordan matrix inversion
+
+## Battleships
+This simulates a two-player game on a grid associated with a matrix
+-   Each player places a predefined set of ships on their boar, then alternates on the opponent's grid
+-   The game continues until one player's entire fleet is destroyed
+
+## Extended statistics
+Each player performance is tracked across multiple matches:
+-   Accuracy per match = (hits / total hits) * 10000
+-   Minimal number of perfect games in order to reach accuracy X
+-   Maximal number of misses allowed before accuracy drops below X
+-   Overall players accuracy across all matches, using weighted averages by number of ships
+I implemented this precisely and efficiently for weighted sums and also by having a defensive input validation
+
+## Hill Cipher algorithm
+After the match finishes, the program decrypts commands using Hill Cipher mod37 algorithm
+
+`Implementation details`
+-   Based on key length I defined a dynamically allocated matrix
+-   Matrix inversion with Gauss-Jordan algorithm
+-   Encryption/Decryption function
+
+## Other structures and functions implemented in the program
+
+`Structures`
+-   nava_t, tabla_t, statistici_t, info_nava_t etc for designing a way to group several related variabiles into one place (I also add _t to specify the type)
+-   memory safety: dynamic allocations validated against NULL and at the end I freed them
+-   clean modular functions:
+-       init_meci() - initialize a new match
+-       plaseaza_nave() - ship placement
+-       faza_atac() - manage the attacks
+-       proceseaza_coduri() - decrypts/ encrypts based on the commands
